@@ -12,9 +12,10 @@ $(document).ready(function() {
             var value = e.value;
             if (!superlib && categories.includes(value)){
                 e.disabled = true;
-                $('input#cardnumber').prop('disabled',true);
-                $('input#surname').prop('disabled',true);
-                $('input#firstname').prop('disabled',true);
+                $('input#cardnumber').prop("readonly", true);
+                $('input#surname').prop("readonly", true);
+                $('input#firstname').prop("readonly", true);
+                //$('input#cardnumber').css('pointer-events','none').attr('tabindex','-1');
             }
             if (!superlib){
                 categories.forEach(piilotus);
