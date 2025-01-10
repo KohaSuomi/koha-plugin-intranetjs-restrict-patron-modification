@@ -75,10 +75,10 @@ sub tool {
     my $plugin_fulldir = $self->mbf_path();
     my $js = read_file($plugin_fulldir .'script.js');
     
-    # my $param_a = $self->retrieve_data('config_param_a');
+    my $param_a = $self->retrieve_data('config_param_a');
     
     ## Add REPLACE_BY_CONFIG_PARAM_A to the js script to replace it with the configuration parameter
-    # $js = $js =~ s/REPLACE_BY_CONFIG_PARAM_A/$param_a/r;
+    $js = $js =~ s/REPLACE_BY_CONFIG_PARAM_A/$param_a/r;
     
     utf8::decode($js);
     $template->param( 'jscontent' => $js );
