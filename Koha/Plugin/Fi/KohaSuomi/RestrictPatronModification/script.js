@@ -3,6 +3,7 @@
 // Virkailijatunnusten muokkausten esto
 $(document).ready(function () {
     if (window.location.pathname.includes('/cgi-bin/koha/members/memberentry.pl') || window.location.pathname.includes('/cgi-bin/koha/members/members-home.pl')) {
+        console.log("restrict");
         var superlib = $('span#logged-in-info-full').children().hasClass('is_superlibrarian');
         var categories = "REPLACE_BY_CONFIG_PARAM_A";
         categories = categories.trim();
@@ -18,9 +19,15 @@ $(document).ready(function () {
                 //$('input#cardnumber').css('pointer-events','none').attr('tabindex','-1');
             }
             if (!superlib) {
+                var preselectedValue = e.value; // Store the preselected value
+                var preselectedValueText = $("#categorycode_entry option:selected").text();
+                console.log(preselectedValueText); // Store the preselected value
                 categories.forEach(piilotus);
                 function piilotus(item) {
-                    $('select#categorycode_entry option[value="' + item + '"]').remove();
+                    
+                    if (item !== preselectedValue) { // Skip removal of preselected value
+                        $('select#categorycode_entry option[value="' + item + '"]').remove();
+                    }
 
                     var selectelement = document.getElementById("categorycode_entry");
                     for (var i = 0; i < selectelement.length; i++) {
