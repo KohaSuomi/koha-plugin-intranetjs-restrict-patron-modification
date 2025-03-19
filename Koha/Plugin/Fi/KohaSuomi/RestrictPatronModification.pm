@@ -22,7 +22,7 @@ our $metadata = {
     minimum_version => '23.11',
     maximum_version => '',
     version         => $VERSION,
-    description     => "Rajaa tiettyjen asiakastyyppien muokkaamisen vain superlibrarian-oikeudelle (estää virkailijoita muuttamasta määritetyn käyttäjän etunimeä, sukunimeä ja kirjastokortin numeroa ja luomasta uusia määritettyä tyyppiä olevia käyttäjiä ja muuttamasta olemassa olevia käyttäjiä näiksi tyypeiksi). Määritettävissä.",
+    description     => "Rajaa tiettyjen asiakastyyppien muokkaamisen vain superlibrarian-oikeudelle (estää virkailijoita muuttamasta määritetyn käyttäjän etunimeä, sukunimeä ja kirjastokortin numeroa ja luomasta uusia määritettyä tyyppiä olevia käyttäjiä ja muuttamasta olemassa olevia käyttäjiä näiksi tyypeiksi). Määritettävissä. (Paikalliskannat)",
 };
 
 ## This is the minimum code required for a plugin's 'new' method
