@@ -3,7 +3,7 @@
 // Virkailijatunnusten muokkausten esto
 $(document).ready(function () {
     if (window.location.pathname.includes('/cgi-bin/koha/members/memberentry.pl') || window.location.pathname.includes('/cgi-bin/koha/members/members-home.pl')) {
-        console.log("restrict");
+
         var superlib = $('span#logged-in-info-full').children().hasClass('is_superlibrarian');
         var categories = "REPLACE_BY_CONFIG_PARAM_A";
         categories = categories.trim();
