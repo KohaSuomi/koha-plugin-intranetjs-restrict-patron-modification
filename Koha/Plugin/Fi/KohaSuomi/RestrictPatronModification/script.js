@@ -2,7 +2,7 @@
 /// ALKU ///
 // Virkailijatunnusten muokkausten esto
 $(document).ready(function () {
-    if (window.location.pathname.includes('/cgi-bin/koha/members/memberentry.pl') || window.location.pathname.includes('/cgi-bin/koha/members/members-home.pl')) {
+    if (window.location.pathname.includes('/cgi-bin/koha/members/memberentry.pl') || window.location.pathname.includes('/cgi-bin/koha/members/members-home.pl') || (window.location.href.indexOf('/cgi-bin/koha/members/member.pl?quicksearch=1')) > -1 ) {
 
         var superlib = $('span#logged-in-info-full').children().hasClass('is_superlibrarian');
         var categories = "REPLACE_BY_CONFIG_PARAM_A";
@@ -24,7 +24,7 @@ $(document).ready(function () {
                 console.log(preselectedValueText); // Store the preselected value
                 categories.forEach(piilotus);
                 function piilotus(item) {
-                    
+
                     if (item !== preselectedValue) { // Skip removal of preselected value
                         $('select#categorycode_entry option[value="' + item + '"]').remove();
                     }
