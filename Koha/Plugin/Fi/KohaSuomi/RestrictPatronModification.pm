@@ -9,6 +9,7 @@ use base qw(Koha::Plugins::Base);
 use C4::Context;
 use utf8;
 use File::Slurp;
+use C4::Languages;
 
 ## Here we set our plugin version
 our $VERSION = "1.0.0";
@@ -25,6 +26,25 @@ our $metadata = {
     description     => "Rajaa tiettyjen asiakastyyppien muokkaamisen vain superlibrarian-oikeudelle (estää virkailijoita muuttamasta määritetyn käyttäjän etunimeä, sukunimeä ja kirjastokortin numeroa ja luomasta uusia määritettyä tyyppiä olevia käyttäjiä ja muuttamasta olemassa olevia käyttäjiä näiksi tyypeiksi). Määritettävissä. (Paikalliskannat)",
 };
 
+sub get_localized_metadata {
+    my ($self) = @_;
+    my $lang = C4::Languages::getlanguage() || 'en';
+    my ($name, $description);
+
+    if ($lang eq 'sv-SE') {
+        $name = "IntranetUserJS: Begränsa ändring av låntagare per kategori";
+        $description = "Begränsa redigering av specifika låntagarkategorier till endast superlibrarian-behörighet (förhindrar personal från att ändra förnamn, efternamn och lånekortsnummer för en angiven användare, samt från att skapa nya användare av den angivna kategorin och att ändra befintliga användare till dessa kategorier). Konfigurerbar. (Lokala databaser)";
+    
+    } elsif ($lang eq 'fi-FI' ) {
+        $name = "IntranetUserJS: Rajoita asiakastyyppien muokkaus";
+        $description = "Rajaa tiettyjen asiakastyyppien muokkaamisen vain superlibrarian-oikeudelle (estää virkailijoita muuttamasta määritetyn käyttäjän etunimeä, sukunimeä ja kirjastokortin numeroa ja luomasta uusia määritettyä tyyppiä olevia käyttäjiä ja muuttamasta olemassa olevia käyttäjiä näiksi tyypeiksi). Määritettävissä. (Paikalliskannat).";
+    } else {
+        $name = "IntranetUserJS: Restrict patron modification by category";
+        $description = "Restrict modification of specific patron categories to superlibrarian privileges only (prevents staff from changing the first name, last name and library card number of a specified user, as well as creating new users of the specified category and changing existing users to these categories). Configurable. (Local databases).";
+    }
+    return ($name, $description);
+}
+
 ## This is the minimum code required for a plugin's 'new' method
 ## More can be added, but none should be removed
 sub new {
@@ -38,6 +58,10 @@ sub new {
     ## This runs some additional magic and checking
     ## and returns our actual 
     my $self = $class->SUPER::new($args);
+
+    my ($name, $description) = $self->get_localized_metadata();
+    $self->{'metadata'}->{'name'} = $name;
+    $self->{'metadata'}->{'description'} = $description;
 
     return $self;
 }
